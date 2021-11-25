@@ -22,8 +22,9 @@ export const Container = styled.button`
 
 interface Props {
   dogName: string;
+  onClick: () => void;
 }
 
-export const Card = ({ dogName }: Props) => {
-  return <Container>{dogName}</Container>;
+export const Card = ({ dogName, onClick }: Props) => {
+  return <Container onClick={onClick}>{dogName}</Container>;
 };

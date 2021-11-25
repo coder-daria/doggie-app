@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { ALL_DOGS } from "./../../API/index";
 import { Card } from "../card/Card";
+import { Modal } from "./../modal/Modal";
 
 export const Container = styled.ul`
   display: flex;
@@ -10,12 +11,27 @@ export const Container = styled.ul`
   width: 20%;
 `;
 
+interface Message {
+  [key: string]: string[];
+}
+
+interface Result {
+  message: Message;
+  status: string;
+}
+
+interface SelectedDog {
+  subbreed: string;
+  breed: string;
+}
+
 export const List = () => {
-  const [dogs, setDogs] = useState<any[]>([]);
+  const [dogs, setDogs] = useState<Message>({});
+  const [selectedDog, setSelectedDog] = useState<SelectedDog | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const result: any = await fetch(ALL_DOGS)
+      const result: Result = await fetch(ALL_DOGS)
         .then((response) => response.json())
         .then((data) => data);
 
@@ -27,13 +43,28 @@ export const List = () => {
     fetchData();
   }, []);
 
-  const dogRases = Object.keys(dogs).map((key: any, index) => dogs[key]);
+  const breedsNames = Object.keys(dogs);
+  const dogList = Object.keys(dogs).map((key: any) => dogs[key]);
 
   return (
     <Container>
-      {dogRases.map((dogRase) => {
-        return dogRase.map((dog: string) => <Card key={dog} dogName={dog} />);
+      {dogList.map((subbreeds, index) => {
+        return subbreeds.map((subbreed: string) => (
+          <Card
+            key={subbreed}
+            dogName={`${subbreed} ${breedsNames[index]}`}
+            onClick={() => {
+              setSelectedDog({
+                subbreed,
+                breed: breedsNames[index],
+              });
+            }}
+          />
+        ));
       })}
+      {selectedDog ? (
+        <Modal setSelectedDog={setSelectedDog} selectedDog={selectedDog} />
+      ) : null}
     </Container>
   );
 };
