@@ -52,7 +52,7 @@ export const Modal = ({ selectedDog, setSelectedDog }: Props) => {
   return (
     <>
       <Background />
-      <Content>
+      <Content role="dialog">
         <BreedName>
           {selectedDog.breed} {selectedDog.subbreed}
         </BreedName>

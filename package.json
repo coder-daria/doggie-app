@@ -24,12 +24,14 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "cypress:open": "cypress open",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "plugin:cypress/recommended"
     ]
   },
   "browserslist": {
@@ -45,7 +47,10 @@
     ]
   },
   "devDependencies": {
+    "@cypress/react": "^5.10.3",
+    "@cypress/webpack-dev-server": "^1.7.0",
     "cypress": "^9.1.0",
+    "eslint-plugin-cypress": "^2.12.1",
     "prettier": "2.4.1"
   }
 }
