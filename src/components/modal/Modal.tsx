@@ -56,7 +56,10 @@ export const Modal = ({ selectedDog, setSelectedDog }: Props) => {
         <BreedName>
           {selectedDog.breed} {selectedDog.subbreed}
         </BreedName>
-        <CloseButton onClick={() => setSelectedDog(null)}>
+        <CloseButton
+          aria-label="close button"
+          onClick={() => setSelectedDog(null)}
+        >
           <AiOutlineClose size="24" color="#fff" />
         </CloseButton>
         <ImageWrapper>
@@ -67,7 +70,11 @@ export const Modal = ({ selectedDog, setSelectedDog }: Props) => {
           )}
         </ImageWrapper>
         <RefreshContainer>
-          <RefreshButton onClick={fetchRandomDogImage} disabled={isLoading}>
+          <RefreshButton
+            aria-label="refresh image button"
+            onClick={fetchRandomDogImage}
+            disabled={isLoading}
+          >
             <MdRefresh size="54" />
           </RefreshButton>
           <span>Check another picture!</span>

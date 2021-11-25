@@ -46,20 +46,22 @@ export const List = () => {
 
   return (
     <Container>
-      {dogList.map((subbreeds, index) => {
-        return subbreeds.map((subbreed: string) => (
-          <Card
-            key={subbreed}
-            dogName={`${subbreed} ${breedsNames[index]}`}
-            onClick={() => {
-              setSelectedDog({
-                subbreed,
-                breed: breedsNames[index],
-              });
-            }}
-          />
-        ));
-      })}
+      {dogList.length > 0
+        ? dogList.map((subbreeds, index) => {
+            return subbreeds.map((subbreed: string) => (
+              <Card
+                key={subbreed}
+                dogName={`${subbreed} ${breedsNames[index]}`}
+                onClick={() => {
+                  setSelectedDog({
+                    subbreed,
+                    breed: breedsNames[index],
+                  });
+                }}
+              />
+            ));
+          })
+        : "Sorry, all dogs went home!"}
       {selectedDog ? (
         <Modal setSelectedDog={setSelectedDog} selectedDog={selectedDog} />
       ) : null}
