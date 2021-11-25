@@ -49,6 +49,26 @@ export const CloseButton = styled(Button)`
   top: -32px;
 `;
 
+export const ImageWrapper = styled.div`
+  min-height: 300px;
+  max-height: 300px;
+`;
+
+export const LoadingContent = styled.span`
+  position: relative;
+  text-align: center;
+  height: 50px;
+  top: 50%;
+  margin-top: -25px;
+`;
+
+export const RefreshContainer = styled.div`
+  height: 150px;
+  max-height: 150px;
+  display: flex;
+  flex-direction: column;
+`;
+
 export const RefreshButton = styled(Button)`
   display: flex;
   flex-direction: column;
@@ -63,12 +83,4 @@ export const RefreshButton = styled(Button)`
       fill: #587a58;
     }
   }
-`;
-
-export const LoadingContent = styled.span`
-  position: relative;
-  text-align: center;
-  height: 50px;
-  top: 50%;
-  margin-top: -25px;
 `;

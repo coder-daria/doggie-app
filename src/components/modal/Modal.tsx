@@ -9,6 +9,8 @@ import {
   RefreshButton,
   DogImage,
   LoadingContent,
+  ImageWrapper,
+  RefreshContainer,
 } from "./Modal.styles";
 
 interface SelectedDog {
@@ -55,17 +57,19 @@ export const Modal = ({ selectedDog, setSelectedDog }: Props) => {
         <CloseButton onClick={() => setSelectedDog(null)}>
           <AiOutlineClose size="24" color="#fff" />
         </CloseButton>
-        {isLoading ? (
-          <LoadingContent>Loading...</LoadingContent>
-        ) : (
-          <>
+        <ImageWrapper>
+          {isLoading ? (
+            <LoadingContent>Loading...</LoadingContent>
+          ) : (
             <DogImage src={randomDogImg} alt="dog" />
-            <RefreshButton onClick={fetchRandomDogImage}>
-              <MdRefresh size="54" />
-            </RefreshButton>
-            <span>Check another picture!</span>
-          </>
-        )}
+          )}
+        </ImageWrapper>
+        <RefreshContainer>
+          <RefreshButton onClick={fetchRandomDogImage} disabled={isLoading}>
+            <MdRefresh size="54" />
+          </RefreshButton>
+          <span>Check another picture!</span>
+        </RefreshContainer>
       </Content>
     </>
   );
