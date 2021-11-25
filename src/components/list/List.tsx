@@ -10,6 +10,8 @@ export const Container = styled.ul`
   display: flex;
   flex-direction: column;
   width: 20%;
+  padding: 0;
+  align-items: center;
 `;
 
 interface Dogs {
