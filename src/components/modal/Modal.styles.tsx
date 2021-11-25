@@ -6,7 +6,7 @@ export const Background = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
   height: 100vh;
   width: 100%;
   z-index: 1;
@@ -83,4 +83,19 @@ export const RefreshButton = styled(Button)`
       fill: #587a58;
     }
   }
+
+  &:disabled {
+    cursor: not-allowed;
+
+    svg {
+      fill: #7e817e;
+    }
+  }
+`;
+
+export const BreedName = styled.div`
+  position: absolute;
+  top: -32px;
+  color: #fff;
+  text-transform: capitalize;
 `;

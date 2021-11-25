@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdRefresh } from "react-icons/md";
+import { Status } from "../types/result";
+
+import { SelectedDog } from "../types/selectedDog";
 
 import {
   Background,
@@ -11,12 +14,8 @@ import {
   LoadingContent,
   ImageWrapper,
   RefreshContainer,
+  BreedName,
 } from "./Modal.styles";
-
-interface SelectedDog {
-  subbreed: string;
-  breed: string;
-}
 
 interface Props {
   setSelectedDog: (selectedDog: SelectedDog | null) => void;
@@ -40,7 +39,7 @@ export const Modal = ({ selectedDog, setSelectedDog }: Props) => {
       .then((response) => response.json())
       .then((data) => data);
 
-    if (result.status) {
+    if (result.status === Status.success) {
       setRandomDogImg(result.message);
     }
     setIsLoading(false);
@@ -54,6 +53,9 @@ export const Modal = ({ selectedDog, setSelectedDog }: Props) => {
     <>
       <Background />
       <Content>
+        <BreedName>
+          {selectedDog.breed} {selectedDog.subbreed}
+        </BreedName>
         <CloseButton onClick={() => setSelectedDog(null)}>
           <AiOutlineClose size="24" color="#fff" />
         </CloseButton>

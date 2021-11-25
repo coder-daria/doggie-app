@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import { ALL_DOGS } from "./../../API/index";
 import { Card } from "../card/Card";
 import { Modal } from "./../modal/Modal";
+import { SelectedDog } from "../types/selectedDog";
+import { Status } from "./../types/result";
 
 export const Container = styled.ul`
   display: flex;
@@ -11,22 +12,19 @@ export const Container = styled.ul`
   width: 20%;
 `;
 
-interface Message {
+interface Dogs {
   [key: string]: string[];
 }
 
 interface Result {
-  message: Message;
+  message: Dogs;
   status: string;
 }
 
-interface SelectedDog {
-  subbreed: string;
-  breed: string;
-}
+export const ALL_DOGS = "https://dog.ceo/api/breeds/list/all";
 
 export const List = () => {
-  const [dogs, setDogs] = useState<Message>({});
+  const [dogs, setDogs] = useState<Dogs>({});
   const [selectedDog, setSelectedDog] = useState<SelectedDog | null>(null);
 
   useEffect(() => {
@@ -35,7 +33,7 @@ export const List = () => {
         .then((response) => response.json())
         .then((data) => data);
 
-      if (result.status) {
+      if (result.status === Status.success) {
         setDogs(result.message);
       }
     };
@@ -44,7 +42,7 @@ export const List = () => {
   }, []);
 
   const breedsNames = Object.keys(dogs);
-  const dogList = Object.keys(dogs).map((key: any) => dogs[key]);
+  const dogList = Object.keys(dogs).map((key) => dogs[key]);
 
   return (
     <Container>
